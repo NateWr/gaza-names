@@ -37,7 +37,7 @@
 	 * is detected.
 	 */
 	let supportsFigures = true;
-	let showNames = false;
+	let showNames = true;
 	let showFilters = false;
 	let showModal = false;
 	let showShare = false;
@@ -254,22 +254,22 @@
 		}
 
 		const trackHover = debounce((e) => {
-			if (isSelected || !canvasElement) {
-				return
-			}
-			const rect = canvasElement.getBoundingClientRect()
-			const x = e.clientX - rect.left
-			const y = e.clientY - rect.top
-			const width = rect.right - rect.left
-			const height = rect.bottom - rect.top
-			if (x < 0 | x > width || y > height || y < 0) {
-				drawTooltip()
-				return
-			}
-			const person = getTooltipPerson(x, y)
-			if (person) {
-				drawTooltip(person)
-			}
+			// if (isSelected || !canvasElement) {
+			// 	return
+			// }
+			// const rect = canvasElement.getBoundingClientRect()
+			// const x = e.clientX - rect.left
+			// const y = e.clientY - rect.top
+			// const width = rect.right - rect.left
+			// const height = rect.bottom - rect.top
+			// if (x < 0 | x > width || y > height || y < 0) {
+			// 	drawTooltip()
+			// 	return
+			// }
+			// const person = getTooltipPerson(x, y)
+			// if (person) {
+			// 	drawTooltip(person)
+			// }
 		}, 100)
 
 		const onClick = e => {
@@ -352,6 +352,26 @@
 		selectedNameIndex = index
 	}
 
+	const startAnimation = () => {
+		showFilters = true
+		hi = 0
+		let interval = null
+
+		const increaseAge = () => {
+			if (hi === 101) {
+				clearInterval(interval)
+			} else {
+				hi = hi + 1
+			}
+		}
+
+		setTimeout(() => {
+			interval = setInterval(increaseAge, 200)
+		}, 3000)
+	}
+
+
+
 
 </script>
 
@@ -399,14 +419,19 @@
 <header class="header">
 	<div>
 		<h1>{t('title')}</h1>
-		<p class="subtitle">
-			{config.meta.total_killed.toLocaleString()}
-			{t('subtitle')}, <span style:white-space="nowrap">{makeDateRange(data.meta, lang)}</span>
-		</p>
+		<div class="subtitle">
+			{
+				t('subtitle')
+					.replace('{count}', config.meta.total_killed.toLocaleString())
+			}
+		</div>
+		<div class="subtitle-date">
+			{makeDateRange(data.meta, lang)}
+		</div>
 	</div>
 	<nav class="nav" bind:this={nav} use:checkNavLeft>
 		<div class="buttons">
-			{#key showFilters}<button
+			<!-- {#key showFilters}<button
 					title={showFilters ? t('reset_filters') : t('show_filters')}
 					on:click={() => {
 						showFilters = !showFilters;
@@ -437,38 +462,40 @@
 					lang={lang === 'en' ? 'ar' : 'en'}
 					on:click={() => goto(`${base}/${lang === 'en' ? 'ar' : 'en'}.html`)}
 					use:tooltip><span>{lang === 'en' ? 'ع' : 'en'}</span></button
-				>{/key}
+				>{/key} -->
+				{#if showFilters}
+					<div class="tray" class:tray-left={navLeft} style="position: relative; top: 1rem;">
+						<!-- <input
+							type="text"
+							list="names"
+							id="name"
+							name="name"
+							bind:value={filterText}
+							placeholder="{t("type_name")}"
+						/>
+						<datalist id="names">
+							{#each data.people as d}
+								<option value={d[nameKey]} />
+							{/each}
+						</datalist> -->
+						<span>{t("aged")}</span>
+						<input type="number" bind:value={lo} min={data.min} max={hi} on:change={doages} />
+						<span>{t("to")}</span>
+						<input type="number" bind:value={hi} min={lo} max={data.max} on:change={doages} />
+						<!-- <button on:click={resetFilters}>{t("reset")}</button> -->
+					</div>
+				<!-- {:else if showShare}
+					<div class="tray buttons" class:tray-left={navLeft}>
+						<a href="https://twitter.com/intent/tweet?text={t('title')}/&url={domain}{base}/{lang}" title="{t("twitter")}"><Icon type="twitter"/></a>
+						<a href="https://www.facebook.com/sharer/sharer.php?u={domain}{base}/{lang}/" title="{t("facebook")}"><Icon type="facebook"/></a>
+						<a href="whatsapp://send?text={t('title')} {domain}{base}/{lang}/" title="{t("whatsapp")}"><Icon type="whatsapp"/></a>
+						<a href="https://reddit.com/submit?title={t('title')}&url={domain}{base}/{lang}/" title="{t("reddit")}"><Icon type="reddit"/></a>
+						<a href="mailto:?subject={t('title')}&body={t('title')} {domain}{base}/{lang}/" title="{t("email")}"><Icon type="email"/></a>
+					</div> -->
+				{:else}
+					<button on:click={startAnimation}>Play</button>
+				{/if}
 		</div>
-		{#if showFilters}
-			<div class="tray" class:tray-left={navLeft}>
-				<input
-					type="text"
-					list="names"
-					id="name"
-					name="name"
-					bind:value={filterText}
-					placeholder="{t("type_name")}"
-				/>
-				<datalist id="names">
-					{#each data.people as d}
-						<option value={d[nameKey]} />
-					{/each}
-				</datalist>
-				<span>{t("aged")}</span>
-				<input type="number" bind:value={lo} min={data.min} max={hi} on:change={doages} />
-				<span>{t("to")}</span>
-				<input type="number" bind:value={hi} min={lo} max={data.max} on:change={doages} />
-				<!-- <button on:click={resetFilters}>{t("reset")}</button> -->
-			</div>
-		{:else if showShare}
-			<div class="tray buttons" class:tray-left={navLeft}>
-				<a href="https://twitter.com/intent/tweet?text={t('title')}/&url={domain}{base}/{lang}" title="{t("twitter")}"><Icon type="twitter"/></a>
-				<a href="https://www.facebook.com/sharer/sharer.php?u={domain}{base}/{lang}/" title="{t("facebook")}"><Icon type="facebook"/></a>
-				<a href="whatsapp://send?text={t('title')} {domain}{base}/{lang}/" title="{t("whatsapp")}"><Icon type="whatsapp"/></a>
-				<a href="https://reddit.com/submit?title={t('title')}&url={domain}{base}/{lang}/" title="{t("reddit")}"><Icon type="reddit"/></a>
-				<a href="mailto:?subject={t('title')}&body={t('title')} {domain}{base}/{lang}/" title="{t("email")}"><Icon type="email"/></a>
-			</div>
-		{/if}
 	</nav>
 </header>
 <div class="container" bind:clientWidth={w}>
@@ -504,10 +531,10 @@
 		<canvas bind:this={canvasElement} id="names-canvas" width="{w || 500}" height="{h || 500}"></canvas>
 		<canvas bind:this={canvasTooltip} id="names-canvas-tooltip" width="{w || 500}" height="{h || 500}"></canvas>
 		{#if tooltipPerson}
-		<Tooltip width={w + 24} x={tooltipX} y={tooltipY} pos="bottom">
+		<!-- <Tooltip width={w + 24} x={tooltipX} y={tooltipY} pos="bottom">
 			<strong>{tooltipPerson[nameKey]}</strong><button on:click={onCloseTooltip} class="modal-close" title="{t('close')}"><Icon type="close"/></button><br/>
 			{tooltipPerson['sex'] === 'm' ? t('male') : t('female')}, {tooltipPerson['age']} {tooltipPerson['age'] === 1 ? t('year_old') : t('years_old')}
-		</Tooltip>
+		</Tooltip> -->
 		{/if}
 	{/if}
 </div>
@@ -626,8 +653,14 @@
 	}
 	.subtitle {
 		display: block;
-		font-size: 1.2em;
-		margin: 4px 0 12px;
+		font-size: 1.25em;
+		margin: 4px 0;
+		max-width: 40em;
+		text-wrap: balance;
+	}
+	.subtitle-date {
+		font-size: 1em;
+		margin: 8px 0 1rem;
 	}
 	.container {
 		position: relative;

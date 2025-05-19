@@ -39,8 +39,8 @@ export default {
       "ar": "من أصل"
     },
     "subtitle": {
-      "en": "Palestinians killed in Gaza",
-      "ar": "فلسطيني/فلسطينية قتلوا/ن في غزة"
+      "en": "We know the names of {count} Palestinians killed in Gaza. Thousands more remain unidentified, unrecoverable, or unknown.",
+      "ar": "{count} فلسطيني/فلسطينية قتلوا/ن في غزة"
     },
     "show_filters": {
       "en": "Show filters",
