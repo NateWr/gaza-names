@@ -1,20 +1,20 @@
 export default {
   "domain": "https://visualizingpalestine.org",
   "meta": {
-    "total_killed": 50020,
+    "total_killed": 60199,
     "start_date": "2023-10-07T00:00:00.000Z",
-    "end_date": "2025-03-23T00:00:00.000Z",
+    "end_date": "2025-07-31T00:00:00.000Z",
     "chunks": [
-      "data/names-2025-03-23-0.csv",
-      "data/names-2025-03-23-1.csv",
-      "data/names-2025-03-23-2.csv",
-      "data/names-2025-03-23-3.csv",
-      "data/names-2025-03-23-4.csv",
-      "data/names-2025-03-23-5.csv",
-      "data/names-2025-03-23-6.csv",
-      "data/names-2025-03-23-7.csv",
-      "data/names-2025-03-23-8.csv",
-      "data/names-2025-03-23-9.csv"
+      "data/names-2025-08-04-0.csv",
+      "data/names-2025-08-04-1.csv",
+      "data/names-2025-08-04-2.csv",
+      "data/names-2025-08-04-3.csv",
+      "data/names-2025-08-04-4.csv",
+      "data/names-2025-08-04-5.csv",
+      "data/names-2025-08-04-6.csv",
+      "data/names-2025-08-04-7.csv",
+      "data/names-2025-08-04-8.csv",
+      "data/names-2025-08-04-9.csv"
     ]
   },
   "texts": {
@@ -83,12 +83,12 @@ export default {
       "ar": "يُظهر هذا الرسم/تُوضح هذه الصورة أسماء {count} فلسطينيًا قُتلوا على يد القوات الإسرائيلية في غزة من {start_date} حتى {end_date}. يشمل هذا الرقم الهائل فقط أولئك الذين تمكنت وزارة الصحة في غزة من تحديد أسمائهم وأعمارهم. لا يزالُ آلاف الأشخاص غير معروفين لأن جثثهم تضررت بشكل لا يُمكن التعرف عليه، أو لعدم وجود أقارب أحياء للتعرف عليهم، أو لأن وزارة الصحة في غزة لم تتمكن من استعادة جثثهم في ظل الإبادة الجماعية المستمرة."
     },
     "about_source": {
-      "en": "The names were translated by <a href='https://iraqbodycount.org/'>Iraq Body Count</a>. We are grateful for their work, which they have released as a <a href='https://iraqbodycount.org/pal/ibc_moh_2025-03-23.xlsx'>public spreadsheet</a>.",
-      "ar": "تمت ترجمة الأسماء من قبل مشروع <a href='https://iraqbodycount.org/'>ضحايا حرب العراق</a>. ونحن ممتنون لجهودهم و لجعل <a href='https://iraqbodycount.org/pal/ibc_moh_2025-03-23.xlsx'>جدول البيانات متاحًا للعامة</a>.",
+      "en": "The names were translated by <a href='https://iraqbodycount.org/'>Iraq Body Count</a>. We are grateful for their work, which they have released as a <a href='https://www.iraqbodycount.org/pal/moh_2025-07-31.xlsx'>public spreadsheet</a>.",
+      "ar": "تمت ترجمة الأسماء من قبل مشروع <a href='https://iraqbodycount.org/'>ضحايا حرب العراق</a>. ونحن ممتنون لجهودهم و لجعل <a href='https://www.iraqbodycount.org/pal/moh_2025-07-31.xlsx'>جدول البيانات متاحًا للعامة</a>."
     },
     "about_updates": {
       "en": "We will continue to update this visual as more information becomes available.",
-      "ar": "سنستمر في تحديث هذا الرسم البياني كلما توفرت معلومات جديدة.",
+      "ar": "سنستمر في تحديث هذا الرسم البياني كلما توفرت معلومات جديدة."
     },
     "aged": {
       "en": "Aged",

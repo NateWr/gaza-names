@@ -4,7 +4,7 @@ import { parse } from 'csv-parse/sync';
 import { stringify } from "csv-stringify/sync";
 import config from '../lib/data/config.js'
 
-const NAMES_CSV = './src/lib/data/names-2025-03-23.csv'
+const NAMES_CSV = './src/lib/data/names-2025-08-04.csv'
 const OUTPUT_CSV_DIR = './static/data/'
 const OUTPUT_CHUNKS = 10
 
@@ -96,7 +96,7 @@ const chunkFiles = []
 for (let i = 0; i < OUTPUT_CHUNKS; i++) {
   const start = i * chunkSize
   const end = Math.min(people.length, start + chunkSize)
-  const filename = `data/names-2025-03-23-${i}.csv`
+  const filename = `data/names-2025-08-04-${i}.csv`
   chunkFiles.push(filename)
   fs.writeFileSync(`./static/${filename}`, stringify(people.slice(start, end), {header: true}))
 }
